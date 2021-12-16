@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
@@ -27,7 +28,8 @@ module.exports = {
         removeComments: true,
         collapseWhitespace: true
       },
-    })
+    }),
+    new ESLintPlugin({})
   ],
   output: {
     filename: '[name].bundle.js',
@@ -40,14 +42,6 @@ module.exports = {
   },
   module: {
     rules: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: "eslint-loader",
-        options: {
-          // eslint options (check .eslintrc.json too)
-        }
-      },
       {
         test: /\.(png|svg|jpg|gif)$/,
         use: [
