@@ -4,11 +4,84 @@
     <meta charset="utf-8"/>
     <title><%= htmlWebpackPlugin.options.title %></title>
     <link rel="stylesheet" href="assets/styles.css">
+    <script src="https://kit.fontawesome.com/4dc814c425.js" crossorigin="anonymous"></script>
   </head>
   <body>
-    <p>
-      Hello! Open the developer tools, please.<br />
-      Start by editing the files in <code>src/</code> folder.
-    </p>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="">Etusivu</a></li>
+          <li><a href="">Ruokalistat</a></li>
+          <li><a href="">Ravintolat</a></li>
+          <li><a href="">Yhteystiedot</a></li>
+        </ul>
+        <div id="search-container">
+          <form class="form">
+            <input type="text" name="search" class="search-field">
+            <button type="submit" class="search-button"><i class="fa fa-search"></i></button>
+          </form>
+        </div>
+      </nav>
+      <img src="https://placekeanu.com/1200/200">
+    </header>
+    <main>
+      <section>
+        <p>Missä tänään syötäisiin? Tuttu tarina ennen lounashetkeä.
+          Palvelu etsii lähelläsi olevat lounaspaikat, sekä näytää niiden päivättäisen lounaslistan.
+          Viikottaiset lounaslistat ovat myös käytettävissäsi. Pääset niihin klikkaamalla ravintolan logoa.</p>
+      </section>
+      <div class="big-container">
+        <div class="menu">
+          <div class="img-div">
+            <img src="https://placekeanu.com/150/150" class="menu-logo">
+          </div>
+
+          <div class="container">
+            <div class="item menu-header">
+              <h3>Karamalmin ruokalista </h3>
+              <div class="location">
+                <i class="fas fa-location-arrow"></i>
+                <p>30km</p>
+              </div>
+
+            </div>
+            <div class="item" id="menu"></div>
+            <div class="button-container">
+              <button id="change-lang">Change Language</button>
+              <button id="sort">Sort Menu</button>
+              <button id="random">Get Random</button>
+            </div>
+
+            <div>
+              <p>Random food:</p>
+              <p id="random-food"></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu">
+          <div class="img-div">
+            <img src="https://placekeanu.com/150/150" class="menu-logo">
+          </div>
+          <div class="container">
+            <div class="item menu-header">
+              <h3>Myllypuron ruokalista</h3>
+              <div class="location">
+                <i class="fas fa-location-arrow"></i>
+                <p>30km</p>
+              </div>
+
+            </div>
+            <div class="item">pl</div>
+            <div class="item">pl</div>
+            <div class="item">pl</div>
+            <div class="item">pl</div>
+            <div class="item">pl</div>
+            <div class="item">pl</div>
+          </div>
+        </div>
+      </div>
+    </main>
+
   </body>
 </html>
