@@ -12,7 +12,10 @@ const coursesFi = ["Jauhelihapihvi, ruskeaa kermakastiketta ja keitettyä peruna
                 "Lunch baguette with BBQ-turkey filling",
                 "Juusto / Kana / Kasvis / Halloumi burgeri ja ranskalaiset"];
 
+import LunchMenu from './assets/lunchmenu.json';
+console.log('menu object', LunchMenu.courses);
 
+console.log(Object.keys(LunchMenu.courses).length);
 const menu = document.querySelector('#menu');
 
 let isEngOn = true;
@@ -22,49 +25,81 @@ const sortMenuButton = document.querySelector('#sort');
 const randomButton = document.querySelector('#random');
 const randomFood = document.getElementById('random-food');
 
+console.log('1',Object.entries(LunchMenu.courses));
+
+
+
+
+const sorting = (array, order) => {
+  const sortedList = [];
+  Object.keys(array).forEach((item) => {
+    if (isEngOn) {
+      sortedList.push(array[item].title_en);
+    } else {
+      sortedList.push(array[item].title_fi);
+    }
+
+  });
+if (order == 1) {
+    return sortedList.sort();
+  } else if (order == -1){
+    return sortedList.reverse();
+  }
+};
+console.log(1,sorting(LunchMenu.courses, -1));
 const showMenu = (array) => {
   menu.innerHTML = '';
-  array.forEach((item) => {
+
+  Object.keys(array).forEach((item) => {
 
     const food = document.createElement('p');
-    food.innerHTML = item;
+
+    if (isEngOn) {
+      food.innerHTML = array[item].title_en;
+
+    } else {
+      food.innerHTML = array[item].title_fi;
+
+    }
     menu.appendChild(food);
   });
 };
-showMenu(coursesEn);
+
+showMenu(LunchMenu.courses);
 
 changeLang.addEventListener('click', () => {
 
   if (isEngOn) {
-    showMenu(coursesFi);
     isEngOn = false;
-
+    showMenu(LunchMenu.courses);
   } else {
-    showMenu(coursesEn);
     isEngOn = true;
-
+    showMenu(LunchMenu.courses);
   }
 });
+
 let isAsc = true;
-const sortMenu = (array) => {
-  if (isAsc) {
-    const temp = array.sort();
-    showMenu(temp);
-    isAsc = false;
-
-  } else {
-    const temp = array.reverse();
-    showMenu(temp);
-    isAsc = true;
-  }
-
-};
-
 sortMenuButton.addEventListener('click', () => {
-  if (isEngOn) {
-    sortMenu(coursesEn);
-  } else {
-    sortMenu(coursesFi);
+  menu.innerHTML = '';
+  if (isAsc) {
+
+    const temp = sorting(LunchMenu.courses, 1);
+    temp.forEach((item) => {
+      const food = document.createElement('p');
+      food.innerHTML = item;
+      menu.appendChild(food);
+    });
+    isAsc = false;
+    console.log(isAsc);
+  } else if (!isAsc){
+    const temp = sorting(LunchMenu.courses, -1);
+    temp.forEach((item) => {
+      console.log(item);
+      const food = document.createElement('p');
+      food.innerHTML = item;
+      menu.appendChild(food);
+    });
+    isAsc = true;
   }
 });
 
