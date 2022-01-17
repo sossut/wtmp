@@ -109,9 +109,9 @@ const getRandom = (array) => {
 };
 
 randomButton.addEventListener('click', () => {
-  if (isEngOn) {
-    getRandom(coursesEn);
+  if (isAsc) {
+    getRandom(sorting(LunchMenu.courses, 1));
   } else {
-    getRandom(coursesFi);
+    getRandom(sorting(LunchMenu.courses, -1));
   }
 });
