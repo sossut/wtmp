@@ -15,7 +15,7 @@ const coursesFi = ["Jauhelihapihvi, ruskeaa kermakastiketta ja keitettyä peruna
 import LunchMenu from './assets/lunchmenu.json';
 console.log('menu object', LunchMenu.courses);
 
-console.log(Object.keys(LunchMenu.courses).length);
+const lunchmenu = Object.entries(LunchMenu.courses);
 const menu = document.querySelector('#menu');
 
 let isEngOn = true;
@@ -25,56 +25,73 @@ const sortMenuButton = document.querySelector('#sort');
 const randomButton = document.querySelector('#random');
 const randomFood = document.getElementById('random-food');
 
-console.log('1',Object.entries(LunchMenu.courses));
 
 
 
-
+// const sortedList = Object.entries(LunchMenu.courses).sort((a, b) => {
+//   if (isEngOn) {
+//     let textA = a[1].title_en.toUpperCase();
+//     let textB = b[1].title_en.toUpperCase();
+//     return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+//   } else {
+//     let textA = a[1].title_fi.toUpperCase();
+//     let textB = b[1].title_fi.toUpperCase();
+//     return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+//   }
+// });
+// console.log('aaa',sortedList);
+// console.log('bbb',sortedList.reverse());
+// console.log('ccc',sortedList[1][1].title_en);
 const sorting = (array, order) => {
-  const sortedList = [];
-  Object.keys(array).forEach((item) => {
+  const sortedList = Object.entries(array).sort((a,b) => {
     if (isEngOn) {
-      sortedList.push(array[item].title_en);
+      let textA = a[1].title_en.toUpperCase();
+      let textB = b[1].title_en.toUpperCase();
+      return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
     } else {
-      sortedList.push(array[item].title_fi);
+      let textA = a[1].title_fi.toUpperCase();
+      let textB = b[1].title_fi.toUpperCase();
+      return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
     }
 
   });
 if (order == 1) {
-    return sortedList.sort();
+    return sortedList;
   } else if (order == -1){
-    return sortedList.sort().reverse();
+    return sortedList.reverse();
   }
 };
-console.log(1,sorting(LunchMenu.courses, -1));
+
+
 const showMenu = (array) => {
   menu.innerHTML = '';
-
-  Object.keys(array).forEach((item) => {
-
+    const temp = array;
+    for (let i=0; i<temp.length;i++) {
     const food = document.createElement('p');
 
     if (isEngOn) {
-      food.innerHTML = array[item].title_en;
+      food.innerHTML = temp[i][1].title_en;
 
     } else {
-      food.innerHTML = array[item].title_fi;
+      food.innerHTML = temp[i][1].title_fi;
 
     }
     menu.appendChild(food);
-  });
+
+  }
+
 };
 
-showMenu(LunchMenu.courses);
+showMenu(lunchmenu);
 
 changeLang.addEventListener('click', () => {
 
   if (isEngOn) {
     isEngOn = false;
-    showMenu(LunchMenu.courses);
+    showMenu(lunchmenu);
   } else {
     isEngOn = true;
-    showMenu(LunchMenu.courses);
+    showMenu(lunchmenu);
   }
 });
 
@@ -84,34 +101,29 @@ sortMenuButton.addEventListener('click', () => {
   if (isAsc) {
 
     const temp = sorting(LunchMenu.courses, 1);
-    temp.forEach((item) => {
-      const food = document.createElement('p');
-      food.innerHTML = item;
-      menu.appendChild(food);
-    });
+
+    showMenu(temp);
     isAsc = false;
-    console.log(isAsc);
+
   } else if (!isAsc){
     const temp = sorting(LunchMenu.courses, -1);
-    temp.forEach((item) => {
-      console.log(item);
-      const food = document.createElement('p');
-      food.innerHTML = item;
-      menu.appendChild(food);
-    });
+
+    showMenu(temp);
     isAsc = true;
   }
 });
 
 const getRandom = (array) => {
   randomFood.innerHTML = '';
-  randomFood.innerHTML = array[Math.floor(Math.random() * array.length)];
+  if (isEngOn) {
+    randomFood.innerHTML = array[Math.floor(Math.random() * array.length)][1].title_en;
+  }  else {
+    randomFood.innerHTML = array[Math.floor(Math.random() * array.length)][1].title_fi;
+  }
+
 };
 
 randomButton.addEventListener('click', () => {
-  if (isAsc) {
-    getRandom(sorting(LunchMenu.courses, 1));
-  } else {
-    getRandom(sorting(LunchMenu.courses, -1));
-  }
+  getRandom(lunchmenu);
 });
+
