@@ -43,7 +43,7 @@ const sorting = (array, order) => {
 if (order == 1) {
     return sortedList.sort();
   } else if (order == -1){
-    return sortedList.reverse();
+    return sortedList.sort().reverse();
   }
 };
 console.log(1,sorting(LunchMenu.courses, -1));
