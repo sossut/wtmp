@@ -1,4 +1,6 @@
 console.log('Hello console!');
+import FazerMenu from './assets/fazermenu.json';
+
 
 const menu = [
   {name: 'Lingonberry jam', price: 4.00},
@@ -52,3 +54,42 @@ const totalCost = (array) => {
   console.log('total cost',cost);
 };
 totalCost(menu);
+
+const veganMenu = [];
+
+const veganOptions = (array) => {
+
+  for (let i=0; i<array.length; i++){
+    veganMenu.push(array[i]);
+
+
+    console.log('123', array[i]);
+    console.log('weekday',array[i].DayOfWeek);
+    console.log('aaaaaaa',array[i].SetMenus);
+    for (let j=0; j< array[i].SetMenus.length;j++) {
+      const arr = array[i].SetMenus[j].Meals;
+      console.log('arr before', arr);
+
+      const filtered = arr.filter(item => {
+        return item.Diets.includes('Veg');
+      });
+
+      veganMenu[i].SetMenus[j].Meals = filtered;
+      console.log('arr after', filtered);
+    }
+    const arr2 = array[i].SetMenus;
+    console.log('arr2 before', arr2);
+  }
+
+  console.log('Vegan',veganMenu);
+
+
+};
+
+veganOptions(FazerMenu.LunchMenus);
+//console.log(veganOptions(FazerMenu.LunchMenus));
+
+
+import Fack from './assets/alternatefazer.json';
+
+console.log('Not Vegan',Fack.LunchMenus);
