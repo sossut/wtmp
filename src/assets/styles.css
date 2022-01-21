@@ -3,8 +3,14 @@
     padding: 0;
     box-sizing: border-box;
 }
+:root {
+  --green: #43E04F;
+  --berry: #940E3F;
+  --tuna: #343A40;
+  --gullgrey: #9BADBF;
+}
 body {
-    width: 1200px;
+    max-width: 1400px;
     margin: auto;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
@@ -22,17 +28,20 @@ nav li {
     margin-right: 30px;
 }
 nav a {
+  font-family: 'LatoWebBold';
+  font-style: normal;
     text-decoration: none;
-    font-size: 1.3em;
-    color: brown;
+    font-size: 24px;
+    color: var(--berry);
 
 }
 nav a:hover {
-    color: greenyellow;
+    color: var(--green);
 }
 .form {
   display: flex;
-  flex-direction: row;
+  align-items: center;
+  align-items: center;
 }
 .search-field {
   width: 100%;
@@ -45,14 +54,62 @@ nav a:hover {
   outline: none;
   margin-left: -33px;
 }
-.search-button i {
+.search-icon {
   width: 20px;
-
+  height: 20px;
+  margin-bottom: -5px;
+  display: block;
   object-fit: cover;
+
+}
+.search-icon:hover {
+  fill: var(--berry);
+}
+.banner {
+  display: flex;
+  height: 200px;
+  width: 100%;
+  overflow: hidden;
+}
+#banner-box {
+  display: flex;
+  z-index: 1;
+  width: 70%;
+}
+#banner-text-box {
+  background-color: var(--green);
+  min-width: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+#banner-text-box h1 {
+  font-family: 'Roboto Slab', serif;
+  font-weight: 800;
+  font-size: 60px;
+}
+#banner-text-box h3{
+  font-family: 'Roboto Slab', serif;
+  font-weight: 400;
+  font-size: 23px;
+  text-align: center;
+}
+#triangle {
+  height: 0;
+  width: 0;
+
+  border-bottom: 200px solid var(--green);
+  border-right: 5vw solid transparent;
+}
+
+.banner img {
+  margin-left: -600px;
 }
 .big-container {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat( auto-fit, minmax(500px, 1fr));
     grid-gap: 20px;
 }
 .container {
@@ -77,33 +134,62 @@ nav a:hover {
 }
 section {
     padding: 5% 8%;
-    font-size: 1.3em;
+    font-family: 'LatoWebRegular';
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1.4em;
 }
 .menu-header {
     display: flex;
     width: 100%;
     justify-content: space-between;
 }
+.menu-header h3 {
+  font-family: 'LatoWebHeavy';
+  font-style: normal;
+  font-size: 21px;
+}
 .menu-logo {
   max-width: 150px;
   max-height: 150px;
 }
-#menu {
+#sodexo-menu, #fazer-menu {
   display: grid;
-  grid-gap: 10px;
-  grid-auto-rows: 25px;
+  grid-gap: 15px;
+  grid-auto-rows:min-content;
   margin-bottom: 20px;
 }
-#menu p {
-  font-size: 0.7em;
+#sodexo-menu li, #fazer-menu li{
+  list-style-type: none;
+  font-family: 'LatoWebRegular';
+  font-style: normal;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+
 }
-#random-food {
+#random-food, #random-food1 {
   height: 5px;
   margin-top: 5px;
-  font-size: 0.7em;
+  font-family: 'LatoWebRegular';
+  font-style: normal;
+  font-size: 10px;
+  letter-spacing: 0.1em;
 }
 .button-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 10px;
+}
+.loc-icon {
+  width: 30px;
+}
+.location {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.distance {
+  font-family: 'LatoWebRegular';
+  font-style: normal;
+  font-size: 14px;
 }

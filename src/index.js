@@ -1,12 +1,11 @@
 
 
+import SodexoData from "./assets/modules/sodexo-data";
 
-import LunchMenu from './assets/lunchmenu.json';
-console.log('menu object', LunchMenu.courses);
+import FazerData from './assets/modules/fazer-data';
 
-const lunchmenu = Object.entries(LunchMenu.courses);
-const menu = document.querySelector('#menu');
-
+const sodexoMenu = document.querySelector('#sodexo-menu');
+const fazerMenu = document.getElementById('fazer-menu');
 let isEngOn = true;
 
 const changeLang = document.querySelector('#change-lang');
@@ -14,105 +13,105 @@ const sortMenuButton = document.querySelector('#sort');
 const randomButton = document.querySelector('#random');
 const randomFood = document.getElementById('random-food');
 
+const sortMenuButton1 = document.querySelector('#sort1');
+const randomButton1 = document.querySelector('#random1');
+const randomFood1 = document.getElementById('random-food1');
 
 
+const showMenu = (array, menuElem) => {
+  menuElem.innerHTML = '';
 
-// const sortedList = Object.entries(LunchMenu.courses).sort((a, b) => {
-//   if (isEngOn) {
-//     let textA = a[1].title_en.toUpperCase();
-//     let textB = b[1].title_en.toUpperCase();
-//     return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
-//   } else {
-//     let textA = a[1].title_fi.toUpperCase();
-//     let textB = b[1].title_fi.toUpperCase();
-//     return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
-//   }
-// });
-// console.log('aaa',sortedList);
-// console.log('bbb',sortedList.reverse());
-// console.log('ccc',sortedList[1][1].title_en);
-const sorting = (array, order) => {
-  const sortedList = Object.entries(array).sort((a,b) => {
-    if (isEngOn) {
-      let textA = a[1].title_en.toUpperCase();
-      let textB = b[1].title_en.toUpperCase();
-      return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
-    } else {
-      let textA = a[1].title_fi.toUpperCase();
-      let textB = b[1].title_fi.toUpperCase();
-      return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
-    }
+  for (const item of array) {
+    const food = document.createElement('li');
+    food.innerHTML = item;
 
-  });
-if (order == 1) {
-    return sortedList;
-  } else if (order == -1){
-    return sortedList.reverse();
+    menuElem.appendChild(food);
   }
 };
 
+let currentSodexoMenu = SodexoData.coursesEn;
+let currentFazerMenu = FazerData.coursesEn;
 
-const showMenu = (array) => {
-  menu.innerHTML = '';
-    const temp = array;
-    for (let i=0; i<temp.length;i++) {
-    const food = document.createElement('p');
-
-    if (isEngOn) {
-      food.innerHTML = temp[i][1].title_en;
-
-    } else {
-      food.innerHTML = temp[i][1].title_fi;
-
-    }
-    menu.appendChild(food);
-
+showMenu(currentSodexoMenu, sodexoMenu);
+showMenu(currentFazerMenu, fazerMenu);
+const sortMenu = (array, order) => {
+  if (order == 1) {
+     return array.sort();
+  } else if (order == -1) {
+    return array.reverse();
   }
-
 };
-
-showMenu(lunchmenu);
-
-changeLang.addEventListener('click', () => {
+console.log(sortMenu(currentFazerMenu, -1));
+const switchLang = () => {
 
   if (isEngOn) {
     isEngOn = false;
-    showMenu(lunchmenu);
+    currentSodexoMenu = SodexoData.coursesFi;
+    currentFazerMenu = FazerData.coursesFi;
+
   } else {
     isEngOn = true;
-    showMenu(lunchmenu);
+    currentSodexoMenu = SodexoData.coursesEn;
+    currentFazerMenu = FazerData.coursesEn;
   }
+
+};
+
+changeLang.addEventListener('click', () => {
+
+  switchLang();
+  showMenu(currentSodexoMenu, sodexoMenu);
+  showMenu(currentFazerMenu, fazerMenu);
+
 });
 
 let isAsc = true;
 sortMenuButton.addEventListener('click', () => {
-  menu.innerHTML = '';
+
+  sodexoMenu.innerHTML = '';
   if (isAsc) {
+    showMenu(sortMenu(currentSodexoMenu, 1), sodexoMenu);
 
-    const temp = sorting(LunchMenu.courses, 1);
-
-    showMenu(temp);
     isAsc = false;
-
-  } else if (!isAsc){
-    const temp = sorting(LunchMenu.courses, -1);
-
-    showMenu(temp);
+  } else {
+    showMenu(sortMenu(currentSodexoMenu, -1), sodexoMenu);
     isAsc = true;
   }
 });
 
-const getRandom = (array) => {
-  randomFood.innerHTML = '';
-  if (isEngOn) {
-    randomFood.innerHTML = array[Math.floor(Math.random() * array.length)][1].title_en;
-  }  else {
-    randomFood.innerHTML = array[Math.floor(Math.random() * array.length)][1].title_fi;
+let fazerAsc = true;
+sortMenuButton1.addEventListener('click', () => {
+
+  fazerMenu.innerHTML = '';
+  if (fazerAsc) {
+    showMenu(sortMenu(currentFazerMenu, 1), fazerMenu);
+    fazerAsc = false;
+  } else {
+    showMenu(sortMenu(currentFazerMenu, -1), fazerMenu);
+    fazerAsc = true;
   }
+});
+
+const getRandom = (array, elem) => {
+  elem.innerHTML = '';
+  elem.innerHTML = array[Math.floor(Math.random() * array.length)];
 
 };
 
 randomButton.addEventListener('click', () => {
-  getRandom(lunchmenu);
+  if (isEngOn) {
+    getRandom(SodexoData.coursesEn, randomFood);
+  } else {
+    getRandom(SodexoData.coursesFi, randomFood);
+  }
+
+});
+randomButton1.addEventListener('click', () => {
+  if (isEngOn) {
+    getRandom(FazerData.coursesEn, randomFood1);
+  } else {
+    getRandom(FazerData.coursesFi, randomFood1);
+  }
+
 });
 

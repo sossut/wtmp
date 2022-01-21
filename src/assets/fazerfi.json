@@ -1,0 +1,216 @@
+ {
+      "DayOfWeek": "Maanantai",
+      "Date": "13.1.2020",
+      "SetMenus": [
+        {
+          "SortOrder": 0,
+          "Name": null,
+          "Price": null,
+          "Meals": [
+            {
+              "Name": "Pinaattiohukaisia",
+              "RecipeId": 5920,
+              "Diets": [
+                "*",
+                "A"
+              ],
+              "Nutrients": null,
+              "IconUrl": ""
+            },
+            {
+              "Name": "Puolukkahilloa",
+              "RecipeId": 76,
+              "Diets": [
+                "G",
+                "L",
+                "M",
+                "Veg"
+              ],
+              "Nutrients": null,
+              "IconUrl": ""
+            },
+            {
+              "Name": "Keitettyjä perunoita",
+              "RecipeId": 30,
+              "Diets": [
+                "*",
+                "G",
+                "L",
+                "M",
+                "Veg"
+              ],
+              "Nutrients": null,
+              "IconUrl": ""
+            }
+          ]
+        },
+        {
+          "SortOrder": 0,
+          "Name": null,
+          "Price": null,
+          "Meals": [
+            {
+              "Name": "Herkkusieni-papupataa",
+              "RecipeId": 16771,
+              "Diets": [
+                "*",
+                "A",
+                "G",
+                "L",
+                "M",
+                "Veg",
+                "VS"
+              ],
+              "Nutrients": null,
+              "IconUrl": ""
+            },
+            {
+              "Name": "Chilimaustettua vehnää",
+              "RecipeId": 17399,
+              "Diets": [
+                "*",
+                "A",
+                "L",
+                "M",
+                "Veg"
+              ],
+              "Nutrients": null,
+              "IconUrl": ""
+            }
+          ]
+        },
+        {
+          "SortOrder": 0,
+          "Name": "Keittolounas",
+          "Price": null,
+          "Meals": [
+            {
+              "Name": "Tortilla-chipsejä",
+              "RecipeId": -1,
+              "Diets": [
+                "G",
+                "L",
+                "M",
+                "Veg"
+              ],
+              "Nutrients": null,
+              "IconUrl": ""
+            },
+            {
+              "Name": "Savujuusto-juuressosekeittoa",
+              "RecipeId": 13673,
+              "Diets": [
+                "A",
+                "G",
+                "VL"
+              ],
+              "Nutrients": null,
+              "IconUrl": ""
+            }
+          ]
+        },
+        {
+          "SortOrder": 0,
+          "Name": null,
+          "Price": null,
+          "Meals": [
+            {
+              "Name": "Seitiä venäläisittäin",
+              "RecipeId": 16244,
+              "Diets": [
+                "*",
+                "A",
+                "G",
+                "L"
+              ],
+              "Nutrients": null,
+              "IconUrl": ""
+            },
+            {
+              "Name": "Tilliperunoita",
+              "RecipeId": 67,
+              "Diets": [
+                "*",
+                "G",
+                "L",
+                "M",
+                "Veg"
+              ],
+              "Nutrients": null,
+              "IconUrl": ""
+            }
+          ]
+        },
+        {
+          "SortOrder": 0,
+          "Name": null,
+          "Price": null,
+          "Meals": [
+            {
+              "Name": "Barbeque-maustettua broileri-tomaattipastaa",
+              "RecipeId": 14223,
+              "Diets": [
+                "*",
+                "A",
+                "L",
+                "M",
+                "VS"
+              ],
+              "Nutrients": null,
+              "IconUrl": ""
+            }
+          ]
+        },
+        {
+          "SortOrder": 0,
+          "Name": null,
+          "Price": null,
+          "Meals": [
+            {
+              "Name": "Kalkkunanfileepihvejä ja rosepippurikastiketta",
+              "RecipeId": 4131,
+              "Diets": [
+                "*",
+                "A",
+                "L",
+                "M"
+              ],
+              "Nutrients": null,
+              "IconUrl": ""
+            },
+            {
+              "Name": "Kasvisriisiä",
+              "RecipeId": 14943,
+              "Diets": [
+                "*",
+                "G",
+                "L",
+                "M",
+                "Veg"
+              ],
+              "Nutrients": null,
+              "IconUrl": ""
+            }
+          ]
+        },
+        {
+          "SortOrder": 0,
+          "Name": null,
+          "Price": null,
+          "Meals": [
+            {
+              "Name": "Aprikoosi-mangorahkaa",
+              "RecipeId": 12046,
+              "Diets": [
+                "A",
+                "G",
+                "L"
+              ],
+              "Nutrients": null,
+              "IconUrl": ""
+            }
+          ]
+        }
+      ],
+      "Html": ""
+    }
