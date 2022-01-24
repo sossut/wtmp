@@ -71,7 +71,7 @@ const start = (timer) => {
 const stop = (timer) => {
   clearTimeout(timer);
 };
-document.addEventListener('keydown', evt => {
+document.addEventListener('keydown', () => {
   displayTime.innerHTML = '';
 
   stop(startTimer);
@@ -80,10 +80,17 @@ document.addEventListener('keydown', evt => {
 
 });
 
-document.addEventListener('mousemove', evt => {
+document.addEventListener('mousemove', () => {
   displayTime.innerHTML = '';
 
   stop(startTimer);
   start(startTimer);
 
+});
+
+document.addEventListener('click', () => {
+  displayTime.innerHTML = '';
+
+  stop(startTimer);
+  start(startTimer);
 });
