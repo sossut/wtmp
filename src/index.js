@@ -17,7 +17,13 @@ const sortMenuButton1 = document.querySelector('#sort1');
 const randomButton1 = document.querySelector('#random1');
 const randomFood1 = document.getElementById('random-food1');
 
-
+/**
+ * Renders arrays on page
+ *
+ *
+ * @param {Array} array
+ * @param {Element} menuElem
+ */
 const showMenu = (array, menuElem) => {
   menuElem.innerHTML = '';
 
@@ -34,6 +40,15 @@ let currentFazerMenu = FazerData.coursesEn;
 
 showMenu(currentSodexoMenu, sodexoMenu);
 showMenu(currentFazerMenu, fazerMenu);
+
+
+/**
+ * Sorts array based on Alphabetical order
+ *
+ * @param {Array} array
+ * @param {Integer} order
+ * @returns
+ */
 const sortMenu = (array, order) => {
   array.sort((a, b) => {
       let fa = a.Name.toLowerCase();
@@ -54,7 +69,9 @@ const sortMenu = (array, order) => {
 
 };
 
-
+/**
+ * Switches language
+ */
 const switchLang = () => {
 
   if (isEngOn) {

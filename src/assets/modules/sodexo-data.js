@@ -17,7 +17,11 @@ const lunchmenu = Object.values(LunchMenu.courses);
 // parseSodexo(lunchmenu);
 // const coursesEnWithDiets = [];
 // const coursesFiWithDiets = [];
-
+/**
+ * Parses Sodexo json data into an array
+ *
+ * @param {Array} array
+ */
 const parseSodexoWithDiets = (array) => {
   array.forEach(item => {
     const mealEng = {Name: '', Diets: [], Header: ''};
