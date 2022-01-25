@@ -23,7 +23,7 @@ const showMenu = (array, menuElem) => {
 
   for (const item of array) {
     const food = document.createElement('li');
-    food.innerHTML = item;
+    food.innerHTML = item.Name;
 
     menuElem.appendChild(food);
   }
@@ -35,13 +35,26 @@ let currentFazerMenu = FazerData.coursesEn;
 showMenu(currentSodexoMenu, sodexoMenu);
 showMenu(currentFazerMenu, fazerMenu);
 const sortMenu = (array, order) => {
+  array.sort((a, b) => {
+      let fa = a.Name.toLowerCase();
+      let fb = b.Name.toLowerCase();
+      if (fa < fb) {
+        return -1;
+      }
+      if (fa > fb) {
+        return 1;
+      }
+      return 0;
+    });
   if (order == 1) {
-     return array.sort();
-  } else if (order == -1) {
+    return array;
+  } else if ( order == -1) {
     return array.reverse();
   }
+
 };
-console.log(sortMenu(currentFazerMenu, -1));
+
+
 const switchLang = () => {
 
   if (isEngOn) {
@@ -65,17 +78,17 @@ changeLang.addEventListener('click', () => {
 
 });
 
-let isAsc = true;
+let sodexoAsc = true;
 sortMenuButton.addEventListener('click', () => {
 
   sodexoMenu.innerHTML = '';
-  if (isAsc) {
+  if (sodexoAsc) {
     showMenu(sortMenu(currentSodexoMenu, 1), sodexoMenu);
 
-    isAsc = false;
+    sodexoAsc = false;
   } else {
     showMenu(sortMenu(currentSodexoMenu, -1), sodexoMenu);
-    isAsc = true;
+    sodexoAsc = true;
   }
 });
 
@@ -94,7 +107,7 @@ sortMenuButton1.addEventListener('click', () => {
 
 const getRandom = (array, elem) => {
   elem.innerHTML = '';
-  elem.innerHTML = array[Math.floor(Math.random() * array.length)];
+  elem.innerHTML = array[Math.floor(Math.random() * array.length)].Name;
 
 };
 
