@@ -17,6 +17,16 @@ const sortMenuButton1 = document.querySelector('#sort1');
 const randomButton1 = document.querySelector('#random1');
 const randomFood1 = document.getElementById('random-food1');
 
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./service-worker.js').then(registration => {
+      console.log('SW registered: ', registration);
+    }).catch(registrationError => {
+      console.log('SW registration failed: ', registrationError);
+    });
+  });
+}
+
 /**
  * Renders arrays on page
  *
