@@ -30,9 +30,14 @@ import FazerEng from '../fazereng.json';
  * @param {Array} array
  * @returns
  */
-const fazerParseWithDiets = (array) =>{
+const fazerParseWithDiets = (array, dayOfWeek) =>{
   const temp = [];
-  array.forEach(item => {
+
+
+  const dayMenu = array[dayOfWeek].SetMenus;
+
+  dayMenu.forEach(item => {
+
     let meal = {Name: '',Diets: [],  Header: ''};
     let abc = '';
     for (let i=0;i<item.Meals.length;i++) {
@@ -54,11 +59,11 @@ const fazerParseWithDiets = (array) =>{
 
   return temp;
 };
-console.log(fazerParseWithDiets(FazerEng.SetMenus));
 
 
-const coursesEn = fazerParseWithDiets(FazerEng.SetMenus);
-const coursesFi = fazerParseWithDiets(FazerFi.SetMenus);
+
+const coursesEn = fazerParseWithDiets(FazerEng.LunchMenus, 1);
+const coursesFi = fazerParseWithDiets(FazerFi.LunchMenus, 1);
 
 const FazerData = {coursesFi,coursesEn};
 export default FazerData;
