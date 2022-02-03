@@ -4,6 +4,8 @@ import SodexoData from "./assets/modules/sodexo-data";
 
 import FazerData from './assets/modules/fazer-data';
 
+import {fetchData} from './assets/modules/network';
+
 const sodexoMenu = document.querySelector('#sodexo-menu');
 const fazerMenu = document.getElementById('fazer-menu');
 let isEngOn = true;
@@ -17,6 +19,12 @@ const sortMenuButton1 = document.querySelector('#sort1');
 const randomButton1 = document.querySelector('#random1');
 const randomFood1 = document.getElementById('random-food1');
 
+const getWeekDay = () => {
+
+  const weekday = new Date().getDay();
+  return weekday - 1;
+};
+
 /**
  * Renders arrays on page
  *
@@ -24,7 +32,7 @@ const randomFood1 = document.getElementById('random-food1');
  * @param {Array} array
  * @param {Element} menuElem
  */
-const showMenu = (array, menuElem) => {
+const renderMenu = (array, menuElem) => {
   menuElem.innerHTML = '';
 
   for (const item of array) {
@@ -35,11 +43,10 @@ const showMenu = (array, menuElem) => {
   }
 };
 
-let currentSodexoMenu = SodexoData.coursesEn;
-let currentFazerMenu = FazerData.coursesEn;
 
-showMenu(currentSodexoMenu, sodexoMenu);
-showMenu(currentFazerMenu, fazerMenu);
+
+
+
 
 
 /**
@@ -76,13 +83,11 @@ const switchLang = () => {
 
   if (isEngOn) {
     isEngOn = false;
-    currentSodexoMenu = SodexoData.coursesFi;
-    currentFazerMenu = FazerData.coursesFi;
+
 
   } else {
     isEngOn = true;
-    currentSodexoMenu = SodexoData.coursesEn;
-    currentFazerMenu = FazerData.coursesEn;
+
   }
 
 };
@@ -90,8 +95,8 @@ const switchLang = () => {
 changeLang.addEventListener('click', () => {
 
   switchLang();
-  showMenu(currentSodexoMenu, sodexoMenu);
-  showMenu(currentFazerMenu, fazerMenu);
+  sodexoFetcher();
+  fazerFetcher();
 
 });
 
@@ -100,11 +105,19 @@ sortMenuButton.addEventListener('click', () => {
 
   sodexoMenu.innerHTML = '';
   if (sodexoAsc) {
-    showMenu(sortMenu(currentSodexoMenu, 1), sodexoMenu);
+    fetchData(SodexoData.dataUrl).then(data => {
+      console.log(Object.values(data.courses));
+      const courses = SodexoData.parseSodexoMenu(Object.values(data.courses), isEngOn);
+      renderMenu(sortMenu(courses, 1), sodexoMenu);
+  });
 
     sodexoAsc = false;
   } else {
-    showMenu(sortMenu(currentSodexoMenu, -1), sodexoMenu);
+    fetchData(SodexoData.dataUrl).then(data => {
+
+        const courses = SodexoData.parseSodexoMenu(Object.values(data.courses), isEngOn);
+        renderMenu(sortMenu(courses, -1), sodexoMenu);
+    });
     sodexoAsc = true;
   }
 });
@@ -114,10 +127,36 @@ sortMenuButton1.addEventListener('click', () => {
 
   fazerMenu.innerHTML = '';
   if (fazerAsc) {
-    showMenu(sortMenu(currentFazerMenu, 1), fazerMenu);
+    if (isEngOn) {
+      fetchData(FazerData.dataUrlEn, true).then(data => {
+        // TODO: when using proxy move JSON.parse stuff to Network module??
+        const menuData = JSON.parse(data.contents);
+        // TODO: How to set correct weekday?
+        const courses = FazerData.parseFazerMenu(menuData.LunchMenus, getWeekDay());
+
+        renderMenu(sortMenu(courses, 1), fazerMenu);
+      });
+    } else {
+      fetchData(FazerData.dataUrlFi, true).then(data => {
+        // TODO: when using proxy move JSON.parse stuff to Network module??
+        const menuData = JSON.parse(data.contents);
+        // TODO: How to set correct weekday?
+        const courses = FazerData.parseFazerMenu(menuData.LunchMenus, getWeekDay());
+
+        renderMenu(sortMenu(courses, 1), fazerMenu);
+      });
+    }
+
     fazerAsc = false;
   } else {
-    showMenu(sortMenu(currentFazerMenu, -1), fazerMenu);
+    fetchData(FazerData.dataUrlEn, true).then(data => {
+      // TODO: when using proxy move JSON.parse stuff to Network module??
+      const menuData = JSON.parse(data.contents);
+      // TODO: How to set correct weekday?
+      const courses = FazerData.parseFazerMenu(menuData.LunchMenus, getWeekDay());
+
+      renderMenu(sortMenu(courses, -1), fazerMenu);
+    });
     fazerAsc = true;
   }
 });
@@ -127,21 +166,82 @@ const getRandom = (array, elem) => {
   elem.innerHTML = array[Math.floor(Math.random() * array.length)].Name;
 
 };
+/**
+ * fetches fazer data and renders it
+ *
+ * @param {Boolean} lang
+ */
+const ffetcher = (lang) => {
+  fetchData(lang, true).then(data => {
+      // TODO: when using proxy move JSON.parse stuff to Network module??
+      const menuData = JSON.parse(data.contents);
+      // TODO: How to set correct weekday?
+      const courses = FazerData.parseFazerMenu(menuData.LunchMenus, getWeekDay());
+
+      renderMenu(courses, fazerMenu);
+    });
+};
+
+const fazerFetcher = () => {
+  if (isEngOn) {
+     ffetcher(FazerData.dataUrlEn);
+  } else {
+      ffetcher(FazerData.dataUrlFi);
+  }
+};
+
+
+/**
+ * fetches sodexo data and renders it
+ */
+const sodexoFetcher = () => {
+  fetchData(SodexoData.dataUrl).then(data => {
+
+    const courses = SodexoData.parseSodexoMenu(Object.values(data.courses), isEngOn);
+
+    renderMenu(courses, sodexoMenu);
+  });
+};
+
+const init = () => {
+  sodexoFetcher();
+  fazerFetcher();
+};
 
 randomButton.addEventListener('click', () => {
-  if (isEngOn) {
-    getRandom(SodexoData.coursesEn, randomFood);
-  } else {
-    getRandom(SodexoData.coursesFi, randomFood);
-  }
+  fetchData(SodexoData.dataUrl).then(data => {
+
+    const courses = SodexoData.parseSodexoMenu(Object.values(data.courses), isEngOn);
+
+    getRandom(courses, randomFood);
+  });
+
 
 });
 randomButton1.addEventListener('click', () => {
   if (isEngOn) {
-    getRandom(FazerData.coursesEn, randomFood1);
+    fetchData(FazerData.dataUrlEn, true).then(data => {
+      // TODO: when using proxy move JSON.parse stuff to Network module??
+      const menuData = JSON.parse(data.contents);
+      // TODO: How to set correct weekday?
+      const courses = FazerData.parseFazerMenu(menuData.LunchMenus, getWeekDay());
+      getRandom(courses, randomFood1);
+
+    });
+
   } else {
-    getRandom(FazerData.coursesFi, randomFood1);
+    fetchData(FazerData.dataUrlFi, true).then(data => {
+      // TODO: when using proxy move JSON.parse stuff to Network module??
+      const menuData = JSON.parse(data.contents);
+      // TODO: How to set correct weekday?
+      const courses = FazerData.parseFazerMenu(menuData.LunchMenus, getWeekDay());
+      getRandom(courses, randomFood1);
+
+    });
+
   }
 
 });
+
+init();
 

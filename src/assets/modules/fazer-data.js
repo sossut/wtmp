@@ -1,36 +1,27 @@
 import FazerFi from '../fazerfi.json';
 import FazerEng from '../fazereng.json';
+import {fetchData} from './network';
 
 
-// const fazerParse = (array) =>{
-//   const temp = [];
-//   array.forEach(item => {
 
-//     let abc = '';
-//     for (let i=0;i<item.Meals.length;i++) {
+Date.prototype.addHours = function(h) {
+  this.setTime(this.getTime() + (h*60*60*1000));
+  return this;
+};
+const date = new Date().addHours(4).toISOString().slice(0, 10);
+console.log(date);
 
-//       let onemeal = item.Meals[i].Name;
-//       if (i == item.Meals.length -1) {
-//         abc += onemeal;
-//       } else {
-//         abc += onemeal + ', ';
-//       }
-
-
-//     }
-
-//     temp.push(abc);
-//   });
-//   return temp;
-// };
+const dataUrlFi = 'https://www.foodandco.fi/api/restaurant/menu/week?language=fi&restaurantPageId=270540&weekDate=' + date;
+const dataUrlEn = 'https://www.foodandco.fi/api/restaurant/menu/week?language=en&restaurantPageId=270540&weekDate=' + date;
 
 /**
  * Parses Fazer json data to array of strings
  *
  * @param {Array} array
+ * @param {Integer} dayOfWeek 0-6
  * @returns
  */
-const fazerParseWithDiets = (array, dayOfWeek) =>{
+const parseFazerMenu = (array, dayOfWeek) =>{
   const temp = [];
 
 
@@ -62,8 +53,8 @@ const fazerParseWithDiets = (array, dayOfWeek) =>{
 
 
 
-const coursesEn = fazerParseWithDiets(FazerEng.LunchMenus, 1);
-const coursesFi = fazerParseWithDiets(FazerFi.LunchMenus, 1);
 
-const FazerData = {coursesFi,coursesEn};
+
+
+const FazerData = {parseFazerMenu, dataUrlFi, dataUrlEn};
 export default FazerData;

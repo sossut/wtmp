@@ -1,28 +1,19 @@
-import LunchMenu from '../lunchmenu.json';
-console.log('menu object', LunchMenu.courses);
+Date.prototype.addHours = function(h) {
+  this.setTime(this.getTime() + (h*60*60*1000));
+  return this;
+};
+const date = new Date().addHours(4).toISOString().slice(0, 10);
 
-const coursesEn = [];
-const coursesFi = [];
+const dataUrl = 'https://www.sodexo.fi/ruokalistat/output/daily_json/152/' + date;
 
-const isEngOn = true;
 
-const lunchmenu = Object.values(LunchMenu.courses);
-
-// const parseSodexo = (array) => {
-//   array.forEach(item => {
-//     coursesEn.push(item.title_en);
-//     coursesFi.push(item.title_fi);
-//   });
-// };
-// parseSodexo(lunchmenu);
-// const coursesEnWithDiets = [];
-// const coursesFiWithDiets = [];
 /**
  * Parses Sodexo json data into an array
  *
  * @param {Array} array
  */
-const parseSodexoWithDiets = (array) => {
+const parseSodexoMenu = (array, lang) => {
+  const temp = [];
   array.forEach(item => {
     const mealEng = {Name: '', Diets: [], Header: ''};
     const mealFi = {Name: '', Diets: [], Header: ''};
@@ -36,11 +27,16 @@ const parseSodexoWithDiets = (array) => {
     mealFi.Diets = diets;
     mealFi.Header = item.category;
     mealEng.Header = item.category;
-    coursesEn.push(mealEng);
-    coursesFi.push(mealFi);
+
+    if (lang == true) {
+      temp.push(mealEng);
+    } else {
+      temp.push(mealFi);
+    }
   });
+  return temp;
 };
-parseSodexoWithDiets(lunchmenu);
+
 
 // const sorting = (array, order) => {
 //   const sortedList = Object.values(array).sort((a,b) => {
@@ -61,6 +57,6 @@ parseSodexoWithDiets(lunchmenu);
 //     return sortedList.reverse();
 //   }
 // };
-console.log(coursesFi);
-const SodexoData = {coursesFi,coursesEn};
+
+const SodexoData = {parseSodexoMenu, dataUrl};
 export default SodexoData;
