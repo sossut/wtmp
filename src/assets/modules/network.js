@@ -23,4 +23,6 @@ const fetchData = async (url, useProxy = false) => {
 };
 
 
+
+
 export {fetchData};

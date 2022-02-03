@@ -242,6 +242,54 @@ randomButton1.addEventListener('click', () => {
   }
 
 });
+const searchResults = document.getElementById('search-results');
+
+/**
+ * searches through arrays to find matches based on menu item names and renders them into an element.
+ *
+ * @param {Url} url
+ * @param {Boolean} parse
+ * @param {String} query
+ */
+const search = (url, parse, query) => {
+  fetchData(url, parse).then(data => {
+    const temp = [];
+    let courses = [];
+    if (parse) {
+      const menuData = JSON.parse(data.contents);
+      courses = FazerData.parseFazerMenu(menuData.LunchMenus, getWeekDay());
+
+    } else {
+      courses = SodexoData.parseSodexoMenu(Object.values(data.courses), isEngOn);
+    }
+    courses.forEach(item => {
+      if (item.Name.toLowerCase().includes(query.toLowerCase())) {
+        temp.push(item);
+      }
+    });
+    console.log(temp);
+    for(const item of temp) {
+      const result = document.createElement('li');
+      result.innerHTML = item.Name;
+      searchResults.appendChild(result);
+    }
+  });
+};
+
+const searchForm = document.getElementById('search-form');
+searchForm.addEventListener('submit', async(evt) => {
+  searchResults.innerHTML = '';
+  evt.preventDefault();
+  const searchInput = document.getElementById('search-input').value;
+
+  search(SodexoData.dataUrl, false, searchInput);
+  if (isEngOn) {
+    search(FazerData.dataUrlEn, true, searchInput);
+  } else {
+    search(FazerData.dataUrlFi, true, searchInput);
+  }
+});
+
 
 init();
 
