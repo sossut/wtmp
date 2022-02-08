@@ -2,10 +2,11 @@
 <html lang="fi">
   <head>
     <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Lounari">
     <title><%= htmlWebpackPlugin.options.title %></title>
     <link rel="stylesheet" href="assets/styles.css">
+    <link rel="stylesheet" type="text/css" media="only screen and (max-device-width: 815px)" href="assets/mobile.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;800&display=swap" rel="stylesheet">
@@ -15,18 +16,20 @@
   <body>
     <header>
       <nav>
-        <ul>
-          <li><a href="">Etusivu</a></li>
-          <li><a href="">Ruokalistat</a></li>
-          <li><a href="">Ravintolat</a></li>
-          <li><a href="">Yhteystiedot</a></li>
+        <div class="hamburger"><i class="fa fa-bars"></i></div>
+        <ul id="nav-ul">
+          <li><a href="1">Etusivu</a></li>
+          <li><a href="1">Ruokalistat</a></li>
+          <li><a href="1">Ravintolat</a></li>
+          <li><a href="1">Yhteystiedot</a></li>
+
         </ul>
         <button id="change-lang">Change Language</button>
         <div id="search-container">
 
           <form id="search-form" class="form">
             <input id="search-input" type="text" name="search" class="search-field" placeholder="Search">
-            <button type="submit" class="search-button">
+            <button type="submit" class="search-button" aria-label="Search Button">
               <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px"
               y="0px" viewBox="0 0 100 125" enable-background="new 0 0 100 100" xml:space="preserve">
               <symbol viewBox="-27.299 -39.024 54.598 78.047">
@@ -106,10 +109,10 @@
             <h1>Lounari</h1>
             <p>Missä tänään syötäisiin?</p>
           </div>
-          <div id="triangle"></div>
+
         </div>
 
-        <img src="https://placekeanu.com/1200/200" alt="bannerphoto">
+
       </div>
 
     </header>
@@ -127,7 +130,7 @@
 
           <div class="container">
             <div class="item menu-header">
-              <h3>Karamalmin ruokalista </h3>
+              <h2>Karamalmin ruokalista </h2>
               <div class="location">
                 <svg class="loc-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px"
                   viewBox="0 0 48 60" style="enable-background:new 0 0 48 48;" xml:space="preserve">
@@ -162,7 +165,7 @@
           </div>
           <div class="container">
             <div class="item menu-header">
-              <h3>Myllypuron ruokalista</h3>
+              <h2>Myllypuron ruokalista</h2>
               <div class="location">
                 <svg class="loc-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px"
                   viewBox="0 0 48 60" style="enable-background:new 0 0 48 48;" xml:space="preserve">

@@ -1,6 +1,4 @@
-import FazerFi from '../fazerfi.json';
-import FazerEng from '../fazereng.json';
-import {fetchData} from './network';
+
 
 
 

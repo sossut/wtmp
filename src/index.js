@@ -19,6 +19,21 @@ const sortMenuButton1 = document.querySelector('#sort1');
 const randomButton1 = document.querySelector('#random1');
 const randomFood1 = document.getElementById('random-food1');
 
+const hamburger = document.querySelector('.hamburger');
+const navUl = document.querySelector('#nav-ul');
+let hamburerOpen = false;
+hamburger.addEventListener('click', () => {
+  if (!hamburerOpen) {
+    navUl.style.display = 'flex';
+
+    hamburerOpen = true;
+  } else {
+    navUl.style.display = 'none';
+    hamburerOpen = false;
+  }
+
+});
+
 const getWeekDay = () => {
 
   const weekday = new Date().getDay();
