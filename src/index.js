@@ -21,7 +21,15 @@ const randomFood1 = document.getElementById('random-food1');
 
 const hamburger = document.querySelector('.hamburger');
 const navUl = document.querySelector('#nav-ul');
-let hamburerOpen = false;
+
+
+let hamburerOpen;
+const width = window.innerWidth;
+if (width < 815) {
+  hamburerOpen = false;
+}
+console.log(width);
+
 hamburger.addEventListener('click', () => {
   if (!hamburerOpen) {
     navUl.style.display = 'flex';

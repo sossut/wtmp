@@ -2,7 +2,7 @@
 <html lang="fi">
   <head>
     <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no" />
     <meta name="description" content="Lounari">
     <title><%= htmlWebpackPlugin.options.title %></title>
     <link rel="stylesheet" href="assets/styles.css">
@@ -145,15 +145,15 @@
               </div>
 
             </div>
-            <ul class="item" id="sodexo-menu"></ul>
-            <div class="button-container">
+            <ul class="item menu-list" id="sodexo-menu"></ul>
+            <div class="button-container item">
 
               <button id="sort">Sort Menu</button>
               <button id="random">Get Random</button>
             </div>
 
-            <div>
-              <p>Random food:</p>
+            <div class="item">
+              <p class="random-p">Random food:</p>
               <p id="random-food"></p>
             </div>
           </div>
@@ -180,13 +180,13 @@
               </div>
 
             </div>
-            <ul class="item" id="fazer-menu"></ul>
-            <div class="button-container">
+            <ul class="item menu-list" id="fazer-menu"></ul>
+            <div class="button-container item">
               <button id="sort1">Sort Menu</button>
               <button id="random1">Get Random</button>
             </div>
-            <div>
-              <p>Random food:</p>
+            <div class="item">
+              <p class="random-p">Random food:</p>
               <p id="random-food1"></p>
             </div>
           </div>

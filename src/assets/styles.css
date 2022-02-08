@@ -4,10 +4,13 @@
     box-sizing: border-box;
 }
 :root {
+  --main: #eeb902;
   --green: #43E04F;
-  --berry: #940E3F;
+  --menu: #F45D01;
   --tuna: #343A40;
   --gullgrey: #9BADBF;
+  --second: #EAEAEA;
+  --button: #F45D01;
 }
 body {
     max-width: 1400px;
@@ -32,7 +35,7 @@ nav a {
   font-style: normal;
     text-decoration: none;
     font-size: 24px;
-    color: var(--berry);
+    color: var(--menu);
 
 }
 nav a:hover {
@@ -69,7 +72,7 @@ nav a:hover {
   min-width: 160px;
 }
 .search-icon:hover {
-  fill: var(--berry);
+  fill: var(--menu);
 }
 .banner {
 
@@ -84,7 +87,7 @@ nav a:hover {
 #banner-box {
   display: flex;
   clip-path: polygon(0 0, 74% 0, 100% 100%, 0 100%);
-  background-color: var(--green);
+  background-color: var(--main);
   z-index: 1;
   width: 50%;
   min-width: 350px;
@@ -130,7 +133,7 @@ nav a:hover {
     border: 1px solid black;
     border-radius: 15px;
     padding: 30px;
-
+    background-color: var(--second);
 }
 .menu img {
     margin-right: 20px;
@@ -203,4 +206,9 @@ section {
 }
 main {
   margin: 10px;
+}
+button {
+  background-color: var(--button);
+  color: white;
+
 }

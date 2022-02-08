@@ -4,13 +4,14 @@
     box-sizing: border-box;
 }
 :root {
+  --main: #eeb902;
   --green: #43E04F;
-  --berry: #940E3F;
+  --menu: #F45D01;
   --tuna: #343A40;
   --gullgrey: #9BADBF;
 }
 body {
-    width: 100%;
+    width: 100vh;
     margin: auto;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
@@ -20,6 +21,8 @@ nav {
     justify-content: space-between;
     align-items: center;
     padding: 25px;
+    height: 7%;
+    font-size: 2rem;
 
 }
 nav > * {
@@ -39,8 +42,8 @@ nav a {
   font-family: 'LatoWebBold';
   font-style: normal;
     text-decoration: none;
-    font-size: 24px;
-    color: var(--berry);
+    font-size: 3rem;
+    color: var(--menu);
 
 }
 nav a:hover {
@@ -49,7 +52,11 @@ nav a:hover {
 .hamburger {
   display: block;
 }
+#change-lang {
+  height: 5vh;
+  font-size: 1.2rem;
 
+}
 .form {
   display: flex;
   align-items: center;
@@ -61,7 +68,8 @@ nav a:hover {
 .search-field {
   width: 100%;
   padding: 10px 35px 10px 15px;
-
+  font-size: 1.5rem;
+  border: black solid 2px;
 }
 .search-button {
   background: transparent;
@@ -70,30 +78,35 @@ nav a:hover {
   margin-left: -33px;
 }
 .search-icon {
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   margin-bottom: -5px;
   display: block;
   object-fit: cover;
 
 }
 .search-icon:hover {
-  fill: var(--berry);
+  fill: var(--menu);
 }
 .banner {
 
-  height: 200px;
+  height: 30vh;
   width: 100%;
+  overflow: hidden;
+  background-image: url(https://placekeanu.com/1400/250);
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 #banner-box {
   display: flex;
   clip-path: polygon(0 0, 74% 0, 100% 100%, 0 100%);
-  background-color: var(--green);
+  background-color: var(--main);
   z-index: 1;
   width: 50%;
   min-width: 330px;
-  height: 200px;
+  height: 100%;
   position: relative;
+  overflow: hidden;
 }
 #banner-text-box {
 
@@ -108,25 +121,17 @@ nav a:hover {
 #banner-text-box h1 {
   font-family: 'Roboto Slab', serif;
   font-weight: 800;
-  font-size: 60px;
+  font-size: 4em;
 }
 #banner-text-box p{
   font-family: 'Roboto Slab', serif;
   font-weight: 400;
-  font-size: 23px;
+  font-size: 2em;
   text-align: center;
 
 }
 
-#banner-img {
-  width: 100%;
-  height: 250px;
-  background-image: url(https://placekeanu.com/1400/250);
-  background-position: center center;
-  background-repeat: no-repeat;
-  overflow: hidden;
 
-}
 .big-container {
     display: grid;
     grid-template-columns: 1fr;
@@ -142,7 +147,7 @@ nav a:hover {
     border: 1px solid black;
     border-radius: 15px;
     padding: 30px;
-
+    background-color: var(--second);
 }
 .menu img {
     margin-right: 20px;
@@ -152,11 +157,14 @@ nav a:hover {
   display: flex;
   align-items: center;
 }
+.container {
+  margin: 30px 0;
+}
 section {
     padding: 5% 8%;
     font-family: 'LatoWebRegular';
     font-style: normal;
-    font-size: 24px;
+    font-size: 2rem;
     line-height: 1.4em;
 }
 .menu-header {
@@ -164,16 +172,16 @@ section {
     width: 100%;
     justify-content: space-between;
 }
-.menu-header h3 {
+.menu-header h2 {
   font-family: 'LatoWebHeavy';
   font-style: normal;
-  font-size: 21px;
+  font-size: 2em;
 }
 .menu-logo {
   max-width: 150px;
   max-height: 150px;
 }
-#sodexo-menu, #fazer-menu {
+.menu-list {
   display: grid;
   grid-gap: 15px;
   grid-auto-rows:min-content;
@@ -183,22 +191,29 @@ section {
   list-style-type: none;
   font-family: 'LatoWebRegular';
   font-style: normal;
-  font-size: 10px;
-  letter-spacing: 0.1em;
+  font-size: 1.3em;
+
 
 }
-#random-food, #random-food1 {
+#random-food, #random-food1, .random-p {
   height: 5px;
   margin-top: 5px;
-  font-family: 'LatoWebRegular';
-  font-style: normal;
-  font-size: 10px;
-  letter-spacing: 0.1em;
+
+
+}
+.random-p {
+  margin-bottom: 25px;
 }
 .button-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 10px;
+}
+.button-container button {
+  height: 5vh;
+  font-family: 'LatoWebRegular';
+  font-style: normal;
+
 }
 .loc-icon {
   width: 30px;
@@ -211,8 +226,13 @@ section {
 .distance {
   font-family: 'LatoWebRegular';
   font-style: normal;
-  font-size: 14px;
+  font-size: 1.2rem;
 }
 main {
   margin: 10px;
+}
+button {
+  background-color: var(--button);
+  color: white;
+  font-size: 1.5em;
 }
