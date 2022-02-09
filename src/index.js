@@ -67,17 +67,12 @@ const renderMenu = (array, menuElem) => {
 };
 
 
-
-
-
-
-
 /**
  * Sorts array based on Alphabetical order
  *
- * @param {Array} array
- * @param {Integer} order
- * @returns
+ * @param {Array} array - menu
+ * @param {Integer} order - asc or desc
+ * @returns {Array} - sorted array
  */
 const sortMenu = (array, order) => {
   array.sort((a, b) => {
@@ -151,20 +146,16 @@ sortMenuButton1.addEventListener('click', () => {
   fazerMenu.innerHTML = '';
   if (fazerAsc) {
     if (isEngOn) {
-      fetchData(FazerData.dataUrlEn, true).then(data => {
-        // TODO: when using proxy move JSON.parse stuff to Network module??
-        const menuData = JSON.parse(data.contents);
-        // TODO: How to set correct weekday?
-        const courses = FazerData.parseFazerMenu(menuData.LunchMenus, getWeekDay());
+      fetchData(FazerData.dataUrlEn, 'fazer-php').then(data => {
+
+        const courses = FazerData.parseFazerMenu(data.LunchMenus, getWeekDay());
 
         renderMenu(sortMenu(courses, 1), fazerMenu);
       });
     } else {
-      fetchData(FazerData.dataUrlFi, true).then(data => {
-        // TODO: when using proxy move JSON.parse stuff to Network module??
-        const menuData = JSON.parse(data.contents);
-        // TODO: How to set correct weekday?
-        const courses = FazerData.parseFazerMenu(menuData.LunchMenus, getWeekDay());
+      fetchData(FazerData.dataUrlFi, 'fazer-php').then(data => {
+
+        const courses = FazerData.parseFazerMenu(data.LunchMenus, getWeekDay());
 
         renderMenu(sortMenu(courses, 1), fazerMenu);
       });
@@ -172,11 +163,9 @@ sortMenuButton1.addEventListener('click', () => {
 
     fazerAsc = false;
   } else {
-    fetchData(FazerData.dataUrlEn, true).then(data => {
-      // TODO: when using proxy move JSON.parse stuff to Network module??
-      const menuData = JSON.parse(data.contents);
-      // TODO: How to set correct weekday?
-      const courses = FazerData.parseFazerMenu(menuData.LunchMenus, getWeekDay());
+    fetchData(FazerData.dataUrlEn, 'fazer-php').then(data => {
+
+      const courses = FazerData.parseFazerMenu(data.LunchMenus, getWeekDay());
 
       renderMenu(sortMenu(courses, -1), fazerMenu);
     });
@@ -195,11 +184,9 @@ const getRandom = (array, elem) => {
  * @param {Boolean} lang
  */
 const ffetcher = (lang) => {
-  fetchData(lang, true).then(data => {
-      // TODO: when using proxy move JSON.parse stuff to Network module??
-      const menuData = JSON.parse(data.contents);
-      // TODO: How to set correct weekday?
-      const courses = FazerData.parseFazerMenu(menuData.LunchMenus, getWeekDay());
+  fetchData(lang, 'fazer-php').then(data => {
+
+      const courses = FazerData.parseFazerMenu(data.LunchMenus, getWeekDay());
 
       renderMenu(courses, fazerMenu);
     });
@@ -243,21 +230,17 @@ randomButton.addEventListener('click', () => {
 });
 randomButton1.addEventListener('click', () => {
   if (isEngOn) {
-    fetchData(FazerData.dataUrlEn, true).then(data => {
-      // TODO: when using proxy move JSON.parse stuff to Network module??
-      const menuData = JSON.parse(data.contents);
-      // TODO: How to set correct weekday?
-      const courses = FazerData.parseFazerMenu(menuData.LunchMenus, getWeekDay());
+    fetchData(FazerData.dataUrlEn, 'fazer-php').then(data => {
+
+      const courses = FazerData.parseFazerMenu(data.LunchMenus, getWeekDay());
       getRandom(courses, randomFood1);
 
     });
 
   } else {
-    fetchData(FazerData.dataUrlFi, true).then(data => {
-      // TODO: when using proxy move JSON.parse stuff to Network module??
-      const menuData = JSON.parse(data.contents);
-      // TODO: How to set correct weekday?
-      const courses = FazerData.parseFazerMenu(menuData.LunchMenus, getWeekDay());
+    fetchData(FazerData.dataUrlFi, 'fazer-php').then(data => {
+
+      const courses = FazerData.parseFazerMenu(data.LunchMenus, getWeekDay());
       getRandom(courses, randomFood1);
 
     });
@@ -278,9 +261,9 @@ const search = (url, parse, query) => {
   fetchData(url, parse).then(data => {
     const temp = [];
     let courses = [];
-    if (parse) {
-      const menuData = JSON.parse(data.contents);
-      courses = FazerData.parseFazerMenu(menuData.LunchMenus, getWeekDay());
+    if (parse === 'fazer-php') {
+
+      courses = FazerData.parseFazerMenu(data.LunchMenus, getWeekDay());
 
     } else {
       courses = SodexoData.parseSodexoMenu(Object.values(data.courses), isEngOn);
@@ -307,9 +290,9 @@ searchForm.addEventListener('submit', async(evt) => {
 
   search(SodexoData.dataUrl, false, searchInput);
   if (isEngOn) {
-    search(FazerData.dataUrlEn, true, searchInput);
+    search(FazerData.dataUrlEn, 'fazer-php', searchInput);
   } else {
-    search(FazerData.dataUrlFi, true, searchInput);
+    search(FazerData.dataUrlFi, 'fazer-php', searchInput);
   }
 });
 

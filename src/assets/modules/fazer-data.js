@@ -17,7 +17,7 @@ const dataUrlEn = 'https://www.foodandco.fi/api/restaurant/menu/week?language=en
  *
  * @param {Array} array
  * @param {Integer} dayOfWeek 0-6
- * @returns
+ * @returns {Array} daily menu
  */
 const parseFazerMenu = (array, dayOfWeek) =>{
   const temp = [];

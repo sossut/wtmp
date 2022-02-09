@@ -10,7 +10,10 @@ const dataUrl = 'https://www.sodexo.fi/ruokalistat/output/daily_json/152/' + dat
 /**
  * Parses Sodexo json data into an array
  *
- * @param {Array} array
+ * @param {Array} - menu
+ * @param {Boolean} - language
+ *
+ * @returns {Array} - daily menu
  */
 const parseSodexoMenu = (array, lang) => {
   const temp = [];
