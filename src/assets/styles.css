@@ -6,11 +6,11 @@
 :root {
   --main: #eeb902;
   --green: #43E04F;
-  --menu: #F45D01;
+  --menu: #983B01;
   --tuna: #343A40;
   --gullgrey: #9BADBF;
   --second: #EAEAEA;
-  --button: #F45D01;
+  --button: #983B01;
 }
 body {
     max-width: 1400px;
@@ -137,6 +137,9 @@ nav a:hover {
 }
 .menu img {
     margin-right: 20px;
+}
+.menu img:hover {
+  border: var(--menu) solid 3px;
 }
 .img-div {
   height: 100%;

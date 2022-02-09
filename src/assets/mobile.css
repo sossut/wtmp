@@ -3,13 +3,7 @@
     padding: 0;
     box-sizing: border-box;
 }
-:root {
-  --main: #eeb902;
-  --green: #43E04F;
-  --menu: #F45D01;
-  --tuna: #343A40;
-  --gullgrey: #9BADBF;
-}
+
 body {
     width: 100vh;
     margin: auto;
