@@ -46,8 +46,8 @@ nav a:hover {
 .hamburger {
   display: block;
 }
-#change-lang {
-  height: 5vh;
+.nav-button {
+
   font-size: 1.2rem;
 
 }

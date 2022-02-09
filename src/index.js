@@ -21,7 +21,7 @@ const randomFood1 = document.getElementById('random-food1');
 
 const hamburger = document.querySelector('.hamburger');
 const navUl = document.querySelector('#nav-ul');
-
+const changeTheme = document.querySelector('#change-theme');
 
 let hamburerOpen;
 const width = window.innerWidth;
@@ -42,9 +42,18 @@ hamburger.addEventListener('click', () => {
 
 });
 
+
+/**
+ * Gets week day index
+ *
+ * @returns {Integer} - weekday index 0-6
+ */
 const getWeekDay = () => {
 
   const weekday = new Date().getDay();
+  if (weekday === 0) {
+    return 6;
+  }
   return weekday - 1;
 };
 
@@ -94,6 +103,9 @@ const sortMenu = (array, order) => {
 
 };
 
+
+
+
 /**
  * Switches language
  */
@@ -117,6 +129,30 @@ changeLang.addEventListener('click', () => {
   fazerFetcher();
 
 });
+
+/**
+ * Saves the theme to localStorage
+ *
+ * @param {String} themeName - document theme name
+ */
+const setTheme = (themeName) => {
+  localStorage.setItem('theme', themeName);
+  document.documentElement.className = themeName;
+};
+
+
+const toggleTheme = () => {
+  if (localStorage.getItem('theme') === 'dark-theme') {
+    setTheme('light-theme');
+  } else {
+    setTheme('dark-theme');
+  }
+};
+
+changeTheme.addEventListener('click', () => {
+  toggleTheme();
+});
+
 
 let sodexoAsc = true;
 sortMenuButton.addEventListener('click', () => {
@@ -216,6 +252,11 @@ const sodexoFetcher = () => {
 const init = () => {
   sodexoFetcher();
   fazerFetcher();
+  if (localStorage.getItem('theme') === 'dark-theme') {
+    setTheme('dark-theme');
+  } else {
+    setTheme('light-theme');
+  }
 };
 
 randomButton.addEventListener('click', () => {
