@@ -23,10 +23,11 @@ const hamburger = document.querySelector('.hamburger');
 const navUl = document.querySelector('#nav-ul');
 const changeTheme = document.querySelector('#change-theme');
 
-let hamburerOpen;
+let hamburerOpen = true;
 const width = window.innerWidth;
 if (width < 815) {
   hamburerOpen = false;
+
 }
 console.log(width);
 

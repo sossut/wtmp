@@ -48,7 +48,7 @@ nav {
     align-items: center;
     padding: 25px;
 }
-nav ul {
+#nav-ul {
     display: flex;
 }
 nav li {
@@ -250,3 +250,4 @@ button {
   color: white;
 
 }
+

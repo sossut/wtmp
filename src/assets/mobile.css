@@ -45,6 +45,7 @@ nav a:hover {
 }
 .hamburger {
   display: block;
+  color: var(--fonts);
 }
 .nav-button {
 
